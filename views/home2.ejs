@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('partials/header1.ejs') %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Add Google Places API with callback -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&libraries=places&callback=initAutocomplete">
+    </script>
+    <style>
+        .quote-form {
+            width: 100%;
+            margin: 80px auto 0;
+            padding: 40px;
+            background: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .quote-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #1e4c9a, #153a77);
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        
+        .form-group {
+            position: relative;
+        }
+        
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #1e4c9a;
+            font-size: 18px;
+        }
+        
+        .form-group.phone-group {
+            position: relative;
+        }
+        
+        .nz-flag {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 25px;
+            z-index: 2;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px 20px 15px 45px;
+            border: 2px solid #eef2f7;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background-color: #f8fafc;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #1e4c9a;
+            box-shadow: 0 0 0 3px rgba(30, 76, 154, 0.1);
+            outline: none;
+        }
+        
+        .form-group input::placeholder,
+        .form-group select {
+            color: #94a3b8;
+        }
+        
+        /* Google Places Autocomplete styles */
+        .pac-container {
+            border-radius: 10px;
+            margin-top: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+        
+        .pac-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+        
+        .pac-item:hover {
+            background-color: #f8fafc;
+        }
+        
+        .submit-btn {
+            grid-column: span 3;
+            background: linear-gradient(90deg, #1e4c9a, #153a77);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 76, 154, 0.2);
+        }
+        
+        @media (max-width: 991.98px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .submit-btn {
+                grid-column: span 1;
+            }
+            
+            .quote-form {
+                margin-top: 60px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('partials/navbar1.ejs') %>
+    
+    <div class="container-fluid px-0">
+        <div class="quote-form">
+            <form action="/submit-quote" method="POST">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" name="name" required placeholder="Your Full Name">
+                    </div>
+
+                    <div class="form-group phone-group">
+                        <img src="https://flagcdn.com/w40/nz.png" alt="NZ" class="nz-flag">
+                        <input type="tel" name="phone" required placeholder="Phone Number (+64)">
+                    </div>
+
+                    <div class="form-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" name="email" required placeholder="Email Address">
+                    </div>
+
+                    <div class="form-group">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" id="address-autocomplete" name="address" required placeholder="Service Location">
+                    </div>
+
+                    <div class="form-group">
+                        <i class="fas fa-broom"></i>
+                        <select name="service_type" required>
+                            <option value="">Select Service Type</option>
+                            <option value="regular">Regular House Cleaning</option>
+                            <option value="deep">Deep Cleaning</option>
+                            <option value="move">Move In/Out Cleaning</option>
+                            <option value="commercial">Commercial Cleaning</option>
+                            <option value="window">Window Cleaning</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <i class="fas fa-clock"></i>
+                        <input type="number" name="hours" min="1" max="8" required placeholder="Estimated Hours (1-8)">
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Get Your Quote
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Define initAutocomplete function globally
+        function initAutocomplete() {
+            console.log('Initializing autocomplete...');
+            const input = document.getElementById('address-autocomplete');
+            if (!input) {
+                console.error('Address input element not found');
+                return;
+            }
+
+            try {
+                const autocomplete = new google.maps.places.Autocomplete(input, {
+                    componentRestrictions: { country: 'nz' },
+                    fields: ['formatted_address', 'geometry', 'name'],
+                    types: ['address']
+                });
+
+                autocomplete.addListener('place_changed', function() {
+                    const place = autocomplete.getPlace();
+                    if (!place.geometry) {
+                        console.warn('No place geometry available');
+                        return;
+                    }
+                    console.log('Place selected:', place.formatted_address);
+                });
+
+                console.log('Autocomplete initialized successfully');
+            } catch (error) {
+                console.error('Error initializing autocomplete:', error);
+            }
+        }
+
+        // Add error handling for Google Maps API loading
+        window.gm_authFailure = function() {
+            console.error('Google Maps API authentication failed');
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/header1.ejs') %>
+    <title>Get Your Quote - CleanVision</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #dcf0f4;
+            color: #333;
+        }
+
+        .container-fluid {
+            padding: 2rem;
+        }
+
+        /* Quote Form Styles */
+        .quote-form {
+            width: 100%;
+            max-width: 800px;
+            margin: 80px auto 0;
+            padding: 40px;
+            background-color: #e8f0f5;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .quote-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #1e4c9a, #153a77);
+        }
+
+        /* Form Grid */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        /* Form Groups */
+        .form-group {
+            position: relative;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #1e4c9a;
+            font-size: 18px;
+        }
+
+        /* Phone Group */
+        .form-group.phone-group {
+            position: relative;
+        }
+
+        .nz-flag {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 25px;
+            z-index: 2;
+        }
+
+        /* Input and Select Styles */
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px 20px 15px 45px;
+            border: 2px solid #eef2f7;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background-color: #f8fafc;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #1e4c9a;
+            box-shadow: 0 0 0 3px rgba(30, 76, 154, 0.1);
+            outline: none;
+        }
+
+        .form-group input::placeholder,
+        .form-group select {
+            color: #94a3b8;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: auto;
+            min-width: 200px;
+            margin: 0 auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(90deg, #1e4c9a, #153a77);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            gap: 8px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 76, 154, 0.2);
+        }
+
+        /* Google Places Autocomplete styles */
+        .pac-container {
+            border-radius: 10px;
+            margin-top: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+
+        .pac-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .pac-item:hover {
+            background-color: #f8fafc;
+        }
+
+        /* Update the form-group for the submit button */
+        .form-group.text-center {
+            grid-column: span 3;  /* Span all columns */
+            display: flex;
+            justify-content: center;  /* Center horizontally */
+        }
+
+        /* Update media query */
+        @media (max-width: 991.98px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group.text-center {
+                grid-column: span 1;
+            }
+            
+            .quote-form {
+                margin-top: 60px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container-fluid text-center">
+    <h1 class="display-5">Get Your Cleaning Quote</h1>
+    <p class="lead text-muted">
+        Fill out the form below, and our team will get back to you with an estimate for your cleaning needs.
+    </p>
+</div>
+
+<div class="container my-5">
+    <div class="quote-form">
+        <form action="/quote" method="POST">
+            <div class="form-grid">
+                <div class="form-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="name" required placeholder="Your Full Name">
+                </div>
+
+                <div class="form-group phone-group">
+                    <img src="https://flagcdn.com/w40/nz.png" alt="NZ" class="nz-flag">
+                    <input type="tel" name="phone" required placeholder="Phone Number (+64)">
+                </div>
+
+                <div class="form-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" name="email" required placeholder="Email Address">
+                </div>
+
+                <div class="form-group">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" id="address-autocomplete" name="address" required placeholder="Service Location">
+                </div>
+
+                <div class="form-group">
+                    <i class="fas fa-broom"></i>
+                    <select name="service_type" required>
+                        <option value="">Select Service Type</option>
+                        <option value="regular">Regular House Cleaning</option>
+                        <option value="deep">Deep Cleaning</option>
+                        <option value="move">Move In/Out Cleaning</option>
+                        <option value="commercial">Commercial Cleaning</option>
+                        <option value="window">Window Cleaning</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <i class="fas fa-clock"></i>
+                    <input type="number" name="hours" min="1" max="8" required placeholder="Estimated Hours">
+                </div>
+
+                <div class="form-group text-center">
+                    <button type="submit" class="submit-btn">
+                        <span>Get Your Quote</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function initAutocomplete() {
+        const input = document.getElementById('address-autocomplete');
+        if (!input) return;
+
+        const autocomplete = new google.maps.places.Autocomplete(input, {
+            componentRestrictions: { country: 'nz' },
+            fields: ['formatted_address', 'geometry', 'name'],
+            types: ['address']
+        });
+
+        autocomplete.addListener('place_changed', function() {
+            const place = autocomplete.getPlace();
+        });
+    }
+</script>
+
+</body>
+</html>

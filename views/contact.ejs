@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/header1.ejs') %>
+    <title>Contact Us - CleanVision</title>
+
+    <!-- Add this line to ensure Bootstrap doesn't override your navbar styles -->
+    <link rel="stylesheet" href="/css/navbar.css">
+
+    <style>
+        /* Scope these styles to the contact page content only */
+        .contact-page {
+            background-color: #dcf0f4;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Rest of your styles remain the same but moved inside .contact-page */
+        .contact-page .container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .contact-page .card {
+            background-color: #e8f0f5;
+            border: 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        /* Continue with the rest of your styles, prefixed with .contact-page */
+        .contact-page .icon-circle {
+            width: 35px;
+            height: 35px;
+            background-color: #f8fafc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c3e50;
+            font-size: 0.9rem;
+        }
+
+        .contact-page .form-control:focus {
+            box-shadow: none;
+            border-color: #2c3e50;
+        }
+
+        .contact-page .input-group-text {
+            border-radius: 8px 0 0 8px;
+            border-color: #e2e8f0;
+            background-color: #f8fafc;
+            border-right: none;
+        }
+
+        .contact-page .form-control {
+            border-radius: 0 8px 8px 0;
+            border-color: #e2e8f0;
+            border-left: none;
+            padding: 0.7rem;
+            background-color: #f8fafc;
+        }
+
+        .contact-page .btn {
+            background-color: #2c3e50;
+            color: white;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .contact-page .btn:hover {
+            background-color: #34495e !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(44, 62, 80, 0.15);
+        }
+
+        .contact-page .text-muted {
+            color: #64748b !important;
+        }
+
+        .contact-page .small {
+            font-size: 0.875rem;
+        }
+
+        .contact-page h2 {
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .contact-page .map-container {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        @media (max-width: 991.98px) {
+            .contact-page .contact-info {
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Wrap your contact content in a div with contact-page class -->
+    <div class="contact-page">
+        <div class="container py-5">
+            <div class="row">
+                <!-- Contact Information -->
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h2 class="mb-4">Contact Information</h2>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex mb-4 align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="icon-circle">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                </div>
+                                <div class="ms-3">
+                                    <h5 class="fw-semibold h6 mb-1">Our Location</h5>
+                                    <p class="mb-0 text-muted small">343 Cashel Street</p>
+                                    <p class="mb-0 text-muted small">Christchurch Central</p>
+                                    <p class="mb-0 text-muted small">Christchurch 8011</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex mb-4 align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="icon-circle">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                </div>
+                                <div class="ms-3">
+                                    <h5 class="fw-semibold h6 mb-1">Phone Number</h5>
+                                    <p class="mb-0 text-muted small">(03) 123-4567</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex mb-4 align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="icon-circle">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                </div>
+                                <div class="ms-3">
+                                    <h5 class="fw-semibold h6 mb-1">Email Address</h5>
+                                    <p class="mb-0 text-muted small">info@cleanvision.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <div class="icon-circle">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                </div>
+                                <div class="ms-3">
+                                    <h5 class="fw-semibold h6 mb-1">Working Hours</h5>
+                                    <p class="mb-0 text-muted small">Mon - Fri: 9:00 AM - 6:00 PM</p>
+                                    <p class="mb-0 text-muted small">Sat: 9:00 AM - 2:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="col-lg-8">
+                    <h2 class="mb-4">Send Us a Message</h2>
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <form action="/contact" method="POST">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label small fw-medium">Your Name</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-user"></i>
+                                            </span>
+                                            <input type="text" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label small fw-medium">Email Address</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-envelope"></i>
+                                            </span>
+                                            <input type="email" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label small fw-medium">Subject</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-tag"></i>
+                                        </span>
+                                        <input type="text" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label small fw-medium">Message</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-message"></i>
+                                        </span>
+                                        <textarea class="form-control" rows="5" required></textarea>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn">
+                                    Send Message
+                                    <i class="fas fa-paper-plane ms-2"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Google Map -->
+            <div class="row mt-4">
+                <div class="col-12 col-lg-8 mx-auto">
+                    <div class="card map-container">
+                        <div class="card-body p-0">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2892.5221243570584!2d172.6396883!3d-43.5344397!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d318a28340f4b11%3A0xb4a8a7c81ecf1a74!2s343%20Cashel%20Street%2C%20Christchurch%20Central%20City%2C%20Christchurch%208011!5e0!3m2!1sen!2snz!4v1709697436099!5m2!1sen!2snz" 
+                                width="100%" 
+                                height="300" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,103 @@
+/* Custom styles for larger logo */
+.logo img {
+    height: 80px; /* Larger logo */
+}
+
+/* Navbar styles */
+.navbar {
+    position: fixed; /* Make the navbar fixed */
+    top: 0; /* Position it at the top */
+    width: 100%; /* Full width */
+    background: rgba(255, 255, 255, 0.95); /* Semi-transparent background */
+    padding: 1rem 0; /* Padding for the navbar */
+    z-index: 1000; /* Ensure it stays above other content */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Shadow for depth */
+    transition: background 0.3s; /* Smooth transition for background */
+}
+
+/* Change background on scroll */
+body.scrolled .navbar {
+    background: rgba(255, 255, 255, 1); /* Solid background when scrolled */
+}
+
+/* Add padding to the body to prevent content from being hidden behind the navbar */
+body {
+    padding-top: 80px; /* Adjust this value based on your navbar height */
+}
+
+.navbar-nav .nav-link {
+    color: #333 !important;
+    font-size: 18px;
+    font-family: 'Arial', sans-serif;
+    padding: 12px 20px;
+    font-weight: 500;
+}
+
+/* Add these new mobile-specific styles */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background: rgba(255, 255, 255, 0.98);
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 1rem;
+    }
+
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .nav-link {
+        padding: 0.8rem !important;
+    }
+
+    .navbar-toggler {
+        border: none;
+        padding: 0.5rem;
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: none;
+        outline: none;
+    }
+
+    .logo {
+        height: 60px; /* Slightly smaller logo on mobile */
+    }
+}
+
+/* Fix for the navbar-toggler icon */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+/* Navbar link hover effect */
+.navbar-nav .nav-link:hover {
+    color: #007bff !important; /* Blue on hover */
+    text-decoration: underline; /* Underline on hover */
+}
+
+.footer {
+    margin-top: auto;
+}
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.social-links a:hover {
+    opacity: 0.8;
+}
+.footer ul li {
+    margin-bottom: 0.5rem;
+}
+.footer ul li a:hover {
+    color: #fff !important;
+}
+
+
+.layout-bg {
+    background-color: #dcf0f4; /* Replace with your preferred color */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Ensures full viewport height */
+}

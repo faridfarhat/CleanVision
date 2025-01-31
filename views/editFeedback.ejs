@@ -1,0 +1,23 @@
+<div class="container mt-4">
+    <h2>Edit Feedback</h2>
+    <form action="/admin/feedback/edit/<%= feedback.id %>" method="POST">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" name="name" value="<%= feedback.name %>" required>
+        </div>
+        <div class="form-group">
+            <label>Role</label>
+            <input type="text" class="form-control" name="role" value="<%= feedback.role %>" required>
+        </div>
+        <div class="form-group">
+            <label>Feedback</label>
+            <textarea class="form-control" name="feedback" rows="3" required><%= feedback.feedback %></textarea>
+        </div>
+        <div class="form-group">
+            <label>Rating</label>
+            <input type="number" class="form-control" name="rating" value="<%= feedback.rating %>" min="1" max="5" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Feedback</button>
+        <a href="/admin" class="btn btn-secondary">Cancel</a>
+    </form>
+</div> 

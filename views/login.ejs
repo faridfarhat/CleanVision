@@ -1,7 +1,18 @@
-
-
     <div class="login-container">
         <h2>Login</h2>
+        
+        <% if (typeof error !== 'undefined') { %>
+            <div class="alert alert-danger">
+                <%= error %>
+            </div>
+        <% } %>
+        
+        <% if (typeof success !== 'undefined') { %>
+            <div class="alert alert-success">
+                <%= success %>
+            </div>
+        <% } %>
+
         <form action="/login" method="POST" class="login-form">
             <div class="form-group">
                 <label for="username">Username</label>

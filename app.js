@@ -29,10 +29,13 @@ app.use(expressLayouts);
 app.set('layout', 'layouts/main');
 
 app.get('/', function (req, res){
+    DB_CONN.query("SELECT * FROM feedback", function (err, feedback) {
+        if (err) throw err;
     res.render("home", {
-        title: 'Home Page',  // Add title for the layout
-        loggedin: req.session.loggedIn
+        title: 'Home Page',
+        feedback_data: feedback
     });
+});
 });
 
 
@@ -214,18 +217,13 @@ app.get('/quote', function (req, res){
 
 
 app.get('/admin', function (req, res) {
-    console.log('Session in admin route:', req.session); // Debug log
-
-    // Check if user is logged in and is admin
     if (!req.session.loggedIn || req.session.role !== 'admin') {
         return res.render('login', {
             error: 'Please login as admin to access this page',
-            title: 'Login Page',
-            loggedin: false
+            title: 'Login Page'
         });
     }
 
-    // If authenticated as admin, fetch data
     DB_CONN.query("SELECT * FROM feedback", function (err, feedback) {
         if (err) {
             console.error('Error fetching feedback:', err);
@@ -241,7 +239,6 @@ app.get('/admin', function (req, res) {
             res.render("admin", {
                 feedback_data: feedback,
                 quotes_data: quotes,
-                loggedin: true,
                 title: 'Admin Dashboard',
                 currentUser: req.session.username
             });
@@ -393,7 +390,6 @@ app.post('/admin/feedback/edit/:id', function(req, res) {
 
 app.post('/login', function(req, res) {
     const { username, password } = req.body;
-    console.log('Login attempt:', { username }); // Debug log
 
     if (username && password) {
         DB_CONN.query('SELECT * FROM users WHERE username = ? AND password = ?', 
@@ -403,19 +399,15 @@ app.post('/login', function(req, res) {
                 console.error('Login error:', error);
                 return res.render('login', {
                     error: 'An error occurred during login',
-                    title: 'Login Page',
-                    loggedin: false
+                    title: 'Login Page'
                 });
             }
 
             if (results.length > 0) {
-                // Store user data in session
                 req.session.loggedIn = true;
                 req.session.username = username;
                 req.session.role = results[0].role;
                 req.session.userId = results[0].id;
-                
-                console.log('Session after login:', req.session); // Debug log
 
                 if (results[0].role === 'admin') {
                     res.redirect('/admin');
@@ -427,16 +419,14 @@ app.post('/login', function(req, res) {
             } else {
                 res.render('login', {
                     error: 'Incorrect username or password',
-                    title: 'Login Page',
-                    loggedin: false
+                    title: 'Login Page'
                 });
             }
         });
     } else {
         res.render('login', {
             error: 'Please enter both username and password',
-            title: 'Login Page',
-            loggedin: false
+            title: 'Login Page'
         });
     }
 });

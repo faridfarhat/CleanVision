@@ -9,7 +9,7 @@
                 <form class="feedback-form" action="/feedback" method="POST">
                     <div class="form-group">
                         <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" nameloggedin: req.session.loggedIn="name" required>
                     </div>
                     
                     <div class="form-group">
@@ -113,6 +113,34 @@
                 <% }); %>
             </tbody>
         </table>
+
+        <!-- Bootstrap Carousel for Feedback -->
+        <div id="feedbackCarousel" class="carousel slide mt-5" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <% for(let i = 0; i < feedback_data.length || i<=5; i++) { %>
+                    <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+                        <div class="table-responsive">
+                            <div style="position: relative;">
+                                <div style="position: absolute; top: 0; right: 0;">
+                                    <% for (let j = 0; j < feedback_data[i].rating; j++) { %>
+                                        ★
+                                    <% } %>
+                                </div>
+                                <div><%= feedback_data[i].feedback %></div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#feedbackCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#feedbackCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
 
 
 <style>
@@ -354,6 +382,36 @@
     .feedback-form-container {
         max-width: 350px;
     }
+}
+
+/* Carousel Custom Styles */
+#feedbackCarousel {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+#feedbackCarousel .carousel-control-prev,
+#feedbackCarousel .carousel-control-next {
+    width: 5%;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 5px;
+    height: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#feedbackCarousel .table {
+    margin-bottom: 0;
+}
+
+#feedbackCarousel .carousel-control-prev {
+    left: -30px;
+}
+
+#feedbackCarousel .carousel-control-next {
+    right: -30px;
 }
 </style>
 

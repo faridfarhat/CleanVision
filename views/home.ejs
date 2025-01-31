@@ -84,9 +84,9 @@
         <h2>What Our Clients Say</h2>
         <div class="feedback-container">
             <div class="feedback-content">
-                <div class="feedback active">Clean Vision has exceeded all our expectations!</div>
-                <div class="feedback">Professional, reliable, and thorough.</div>
-                <div class="feedback">Their attention to detail is remarkable.</div>
+                <% feedback_data.slice(0, 5).forEach((feedback) => { %>
+                    <div class="feedback <%= feedback.active ? 'active' : '' %>"><%= feedback.feedback %></div>
+                <% }); %>
             </div>
             <div class="feedback-controls">
                 <button class="prev-feedback" onclick="moveFeedback(-1)">&#10094;</button>

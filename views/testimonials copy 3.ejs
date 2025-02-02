@@ -1,0 +1,125 @@
+<div class="feedback-section">
+    <div class="quote-icon">“</div>
+
+    <div class="feedback-content">
+        <% feedback_data.slice(0, 5).forEach((feedback) => { %>
+            <div class="feedback <%= feedback.active ? 'active' : '' %>">
+                <div class="feedback-details">
+                    <div class="feedback-text">
+                        <p class="feedback-message"><%= feedback.feedback %></p>
+                    </div>
+                    <div class="feedback-meta">
+                        <div class="meta-left">
+                            <strong class="feedback-name"><%= feedback.name %></strong> - <span class="role"><%= feedback.role %></span>
+                        </div>
+                        <div class="rating">
+                            <% for (let i = 0; i < feedback.rating; i++) { %>
+                                <i class="fas fa-star"></i>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+<style>
+.feedback-section {
+    width: 100%; /* Allow full width for the feedback section */
+    max-width: 600px; /* Set a max width for better layout */
+    background-color: #fff; /* Light background for contrast */
+    color: #333; /* Dark text for readability */
+    border-radius: 10px;
+    padding: 30px; /* Increased padding for a spacious feel */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Ensure it appears above other content */
+    margin: 20px auto; /* Center the section */
+}
+
+.quote-icon {
+    font-size: 60px; /* Slightly larger quote icon */
+    position: absolute;
+    top: -20px; /* Adjusted position */
+    left: 10px;
+    color: #1e4c9a; /* Color for the quote icon */
+    font-weight: bold;
+}
+
+.feedback-content {
+    position: relative;
+    height: auto; /* Allow height to adjust based on content */
+    text-align: left; /* Align text to the left for better readability */
+}
+
+.feedback {
+    position: relative; /* Change from absolute to relative */
+    width: 100%;
+    opacity: 1; /* Ensure feedback is fully visible */
+    transition: opacity 0.5s ease;
+    margin-bottom: 20px; /* Space between testimonials */
+    padding: 20px; /* Increased padding for better spacing */
+    background-color: #f8f9fa; /* Light background for each feedback */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.feedback:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+}
+
+.feedback-message {
+    margin: 0; /* Remove default margin */
+}
+
+.feedback-meta {
+    display: flex;
+    justify-content: space-between; /* Space between name/role and rating */
+    align-items: center; /* Center align items */
+    margin-top: 10px; /* Space above meta */
+}
+
+.meta-left {
+    display: flex;
+    flex-direction: column; /* Stack name and role */
+}
+
+.feedback-name {
+    font-weight: bold;
+    color: #1e4c9a; /* Color for the name */
+}
+
+.role {
+    font-style: italic;
+    color: #777; /* Lighter color for the role */
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+}
+
+.rating i {
+    color: #f39c12; /* Gold color for stars */
+}
+
+.feedback-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.feedback-controls button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #1e4c9a;
+    cursor: pointer;
+    padding: 10px;
+    transition: background 0.3s;
+}
+
+.feedback-controls button:hover {
+    background: rgba(30, 76, 154, 0.1); /* Light hover effect */
+}
+</style>

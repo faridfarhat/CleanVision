@@ -1,0 +1,104 @@
+<div class="feedback-form">
+    <h2>Submit Your Feedback</h2>
+    <form action="/feedback" method="POST">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="role">Role:</label>
+            <input type="text" id="role" name="role" required>
+        </div>
+        <div class="form-group">
+            <label for="company">Company:</label>
+            <input type="text" id="company" name="company" required>
+        </div>
+        <div class="form-group">
+            <label for="feedback">Feedback:</label>
+            <textarea id="feedback" name="feedback" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+            <label>Rating:</label>
+            <div class="rating-stars">
+                <input type="radio" id="star1" name="rating" value="5" required>
+                <label for="star1" class="star">&#9733;</label>
+                <input type="radio" id="star2" name="rating" value="4">
+                <label for="star2" class="star">&#9733;</label>
+                <input type="radio" id="star3" name="rating" value="3">
+                <label for="star3" class="star">&#9733;</label>
+                <input type="radio" id="star4" name="rating" value="2">
+                <label for="star4" class="star">&#9733;</label>
+                <input type="radio" id="star5" name="rating" value="1">
+                <label for="star5" class="star">&#9733;</label>
+            </div>
+        </div>
+        <button type="submit">Submit Feedback</button>
+    </form>
+</div>
+
+<style>
+.feedback-form {
+    background-color: #ffffff; /* White background for a clean look */
+    padding: 20px; /* Increased padding for comfort */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 10px; /* Reduced margin to minimize gap */
+    max-width: 400px; /* Set a max width for the form */
+}
+
+.feedback-form h2 {
+    color: #333; /* Dark gray for the form title */
+    margin-bottom: 15px; /* Spacing below the title */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Space between form fields */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px; /* Space between label and input */
+    color: #555; /* Medium gray for labels */
+}
+
+input, textarea {
+    width: 100%; /* Full width for inputs */
+    padding: 10px; /* Comfortable padding */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px;
+    font-size: 16px; /* Increased font size for readability */
+}
+
+.rating-stars {
+    display: flex;
+    align-items: center;
+}
+
+.rating-stars input {
+    display: none; /* Hide radio buttons */
+}
+
+.rating-stars label {
+    font-size: 24px; /* Size of star icons */
+    color: #ccc; /* Default color for stars */
+    cursor: pointer;
+}
+
+.rating-stars input:checked ~ label {
+    color: #ffb300; /* Gold color for selected stars */
+}
+
+button {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* Button text color */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* Increased font size for button */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+</style>

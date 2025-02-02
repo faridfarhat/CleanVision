@@ -129,6 +129,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Role</th>
+                            <th>Company</th>
                             <th>Feedback</th>
                             <th>Rating</th>
                             <th>Actions</th>
@@ -140,17 +141,24 @@
                                 <tr>
                                     <td><%= feedback.name %></td>
                                     <td><%= feedback.role %></td>
+                                    <td><%= feedback.company %></td>
                                     <td><%= feedback.feedback %></td>
-                                    <td><%= feedback.rating %> ★</td>
                                     <td>
-                                        <button class="btn btn-edit" onclick="editFeedback('<%= feedback.id %>')">Edit</button>
-                                        <button class="btn btn-delete" onclick="deleteFeedback('<%= feedback.id %>')">Delete</button>
+                                        <% for(let i = 0; i < feedback.rating; i++) { %>
+                                            <span style="color: #ffd700;">★</span>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <a href="/admin/feedback/edit/<%= feedback.id %>" class="btn btn-edit">Edit</a>
+                                        <form action="/admin/feedback/delete/<%= feedback.id %>" method="POST" style="display: inline;">
+                                            <button type="submit" class="btn btn-delete" onclick="return confirm('Are you sure?')">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             <% }); %>
                         <% } else { %>
                             <tr>
-                                <td colspan="5" class="text-center">No feedback available</td>
+                                <td colspan="6" class="text-center">No feedback available</td>
                             </tr>
                         <% } %>
                     </tbody>

@@ -80,21 +80,10 @@
     </div>
 
     <!-- Feedback Section -->
-    <div class="feedback-section">
-        <h2>What Our Clients Say</h2>
-        <div class="feedback-container">
-            <div class="feedback-content">
-                <% feedback_data.slice(0, 5).forEach((feedback) => { %>
-                    <div class="feedback <%= feedback.active ? 'active' : '' %>"><%= feedback.feedback %></div>
-                <% }); %>
-            </div>
-            <div class="feedback-controls">
-                <button class="prev-feedback" onclick="moveFeedback(-1)">&#10094;</button>
-                <button class="next-feedback" onclick="moveFeedback(1)">&#10095;</button>
-            </div>
-        </div>
+    <div class="feedback-section-container">
+        <%- include('feedback_form.ejs') %>
+        <%- include('testimonials.ejs') %>
     </div>
-
 
 <style>
 .home-container {
@@ -241,6 +230,24 @@ h2 {
 
 .feedback-controls button:hover {
     background: rgba(30, 76, 154, 0.1); /* Light hover effect */
+}
+
+.feedback-section-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.feedback-form {
+    flex: 1;
+    margin-right: 10px;
+    max-width: 400px;
+}
+
+.feedback-section {
+    flex: 1;
+    max-width: 400px;
 }
 </style>
 

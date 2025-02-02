@@ -57,17 +57,16 @@ app.get('/feedback', function (req, res){
 app.post("/feedback", function(req, res) {
     let name = req.body.name;
     let role = req.body.role;
+    let company = req.body.company;
     let feedback = req.body.feedback;
     let rating = req.body.rating;
-    console.log("Debug")
-    const insert = `INSERT INTO feedback (name, role, feedback, rating) VALUES ("${name}", "${role}", "${feedback}", "${rating}")`;
-     DB_CONN.query(insert, function(err, result) {
-        if(err) throw err;
 
-        
-    })
+    const insert = `INSERT INTO feedback (name, role, company, feedback, rating) VALUES (?, ?, ?, ?, ?)`;
+    DB_CONN.query(insert, [name, role, company, feedback, rating], function(err, result) {
+        if(err) throw err;
+    });
     res.redirect("/"); 
-})
+});
 
 app.get('/contact', function (req, res){
     res.render("contact", {
@@ -319,7 +318,7 @@ app.post('/admin/quote/edit/:id', function(req, res) {
 });
 
 app.post('/admin/feedback/delete/:id', function(req, res) {
-    if (!req.session.loggedin || req.session.role !== 'admin') {
+    if (!req.session.loggedIn || req.session.role !== 'admin') {
         return res.status(403).send('Unauthorized');
     }
 

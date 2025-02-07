@@ -101,3 +101,96 @@ body {
     padding: 0;
     min-height: 100vh; /* Ensures full viewport height */
 }
+
+
+
+
+
+        .contact-page {
+            background-color: #dcf0f4;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Rest of your styles remain the same but moved inside .contact-page */
+        .contact-page .container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .contact-page .card {
+            background-color: #e8f0f5;
+            border: 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        /* Continue with the rest of your styles, prefixed with .contact-page */
+        .contact-page .icon-circle {
+            width: 35px;
+            height: 35px;
+            background-color: #f8fafc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c3e50;
+            font-size: 0.9rem;
+        }
+
+        .contact-page .form-control:focus {
+            box-shadow: none;
+            border-color: #2c3e50;
+        }
+
+        .contact-page .input-group-text {
+            border-radius: 8px 0 0 8px;
+            border-color: #e2e8f0;
+            background-color: #f8fafc;
+            border-right: none;
+        }
+
+        .contact-page .form-control {
+            border-radius: 0 8px 8px 0;
+            border-color: #e2e8f0;
+            border-left: none;
+            padding: 0.7rem;
+            background-color: #f8fafc;
+        }
+
+        .contact-page .btn {
+            background-color: #2c3e50;
+            color: white;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .contact-page .btn:hover {
+            background-color: #34495e !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(44, 62, 80, 0.15);
+        }
+
+        .contact-page .text-muted {
+            color: #64748b !important;
+        }
+
+        .contact-page .small {
+            font-size: 0.875rem;
+        }
+
+        .contact-page h2 {
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .contact-page .map-container {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        @media (max-width: 991.98px) {
+            .contact-page .contact-info {
+                margin-bottom: 2rem;
+            }
+        }
